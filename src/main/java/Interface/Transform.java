@@ -10,7 +10,7 @@ public class Transform implements Rotate, Translate{
      * Rotate all points of collections given in parameters
      * with the angle given
      * @param coords collections of Point2d
-     * @param angle
+     * @param angle angle of rotation
      * @return rotated collection
      * */
     public Collection<Point2d> rotate(Collection<Point2d> coords, Double angle) {

@@ -121,10 +121,7 @@ public class BaseShape extends Transform implements Cloneable {
      */
     public Double getMaxX() {
         Optional<Point2d> maxXPoint = coords.stream().max(Comparator.comparing(Point2d::X));
-        if (maxXPoint.isPresent()) {
-            return maxXPoint.get().X();
-        }
-        return -Double.MAX_VALUE;
+        return maxXPoint.isPresent() ? maxXPoint.get().X() : -Double.MAX_VALUE;
     }
 
     /** TODO
@@ -132,10 +129,7 @@ public class BaseShape extends Transform implements Cloneable {
      */
     public Double getMaxY() {
         Optional<Point2d> maxYPoint = coords.stream().max(Comparator.comparing(Point2d::Y));
-        if (maxYPoint.isPresent()) {
-            return maxYPoint.get().Y();
-        }
-        return -Double.MAX_VALUE;
+        return maxYPoint.isPresent() ? maxYPoint.get().Y() : -Double.MAX_VALUE;
     }
 
     /** TODO
@@ -150,10 +144,7 @@ public class BaseShape extends Transform implements Cloneable {
      */
     public Double getMinX() {
         Optional<Point2d> minXPoint = coords.stream().min(Comparator.comparing(Point2d::X));
-        if (minXPoint.isPresent()) {
-            return minXPoint.get().X();
-        }
-        return Double.MAX_VALUE;
+        return minXPoint.isPresent() ? minXPoint.get().X() : Double.MAX_VALUE;
     }
 
     /** TODO
@@ -161,10 +152,7 @@ public class BaseShape extends Transform implements Cloneable {
      */
     public Double getMinY() {
         Optional<Point2d> minYPoint = coords.stream().min(Comparator.comparing(Point2d::Y));
-        if (minYPoint.isPresent()) {
-            return minYPoint.get().Y();
-        }
-        return Double.MAX_VALUE;
+        return minYPoint.isPresent() ? minYPoint.get().Y() : Double.MAX_VALUE;
     }
 
     /** TODO
@@ -177,7 +165,7 @@ public class BaseShape extends Transform implements Cloneable {
     /**
      * Rotate all points in the collection of current object
      * with the angle given
-     * @param angle
+     * @param angle angle of rotation
      * @return rotated collection
      * */
     public Collection<Point2d> rotate(Double angle) {
@@ -188,8 +176,8 @@ public class BaseShape extends Transform implements Cloneable {
      * Translate all points in the collection of current object by the specified x and y offsets.
      * This method creates a new collection where each point is translated
      * with the angle given
-     * @param x
-     * @param y
+     * @param x  The horizontal offset for the translation of each point.
+     * @param y  The vertical offset for the translation of each point.
      * @return translated collection
      * */
     public Collection<Point2d> translate(Double x, Double y) {

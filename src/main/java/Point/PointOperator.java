@@ -1,7 +1,5 @@
 package Point;
 
-import java.util.*;
-
 public final class PointOperator {
 
     /** TODO
@@ -27,7 +25,7 @@ public final class PointOperator {
         for (int i = 0; i < vector.length; i++) {
             vector[i] = 0.0;
             for (int j = 0; j < vector.length; j++) {
-                vector[i] += rotationMatrix[i][j]*vectorCopy[j];
+                vector[i] += rotationMatrix[i][j] * vectorCopy[j];
             }
         }
     }

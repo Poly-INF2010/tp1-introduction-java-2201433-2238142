@@ -1,6 +1,5 @@
 package Letter;
 
-import Point.Point2d;
 import Shape.*;
 
 public final class LetterFactory {
@@ -19,7 +18,7 @@ public final class LetterFactory {
     public static BaseShape create_A()  {
         BaseShape shape = new BaseShape();
         Rectangle line = new Rectangle(halfStripeThickness, maxHeight);
-        Rectangle middleLine = new Rectangle(halfMaxWidth, stripeThickness);
+        Rectangle middleLine = new Rectangle(halfMaxWidth, halfStripeThickness);
         BaseShape middleLineTranslate = new BaseShape();
         middleLineTranslate.addAll(middleLine.translate(0.0, halfMaxHeight / 2));
         BaseShape obliqueLine1 = new BaseShape();

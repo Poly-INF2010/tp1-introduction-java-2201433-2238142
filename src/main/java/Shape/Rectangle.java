@@ -14,8 +14,8 @@ public class Rectangle extends BaseShape {
         super();
         double halfHeight = height / 2;
         double halfWidth = width / 2;
-        for (double i = -halfWidth; i <= halfWidth; i += 0.5) {
-            for (double j = -halfHeight; j <= halfHeight; j += 0.5) {
+        for (double i = -halfWidth; i <= halfWidth; i += spaceBetweenPoint) {
+            for (double j = -halfHeight; j <= halfHeight; j += spaceBetweenPoint) {
                 add(new Point2d(i, j));
             }
         }

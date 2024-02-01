@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class BaseShape extends Transform implements Cloneable {
     private final Collection<Point2d> coords;
+    protected final double spaceBetweenPoint = 0.5;
 
 //helper function to clone a list of points 
   public Collection<Point2d> cloneCoords(Collection<Point2d> coords) {
@@ -45,7 +46,7 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Updated BaseShape
      */
     public BaseShape add(BaseShape shape) {
-        shape.coords.forEach(point -> add(point.clone()));
+        shape.coords.forEach(this::add);
         return this;
     }
 
@@ -55,7 +56,7 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Updated BaseShape
      */
     public BaseShape addAll(Collection<Point2d> coords) {
-        coords.forEach(point -> add(point.clone()));
+        coords.forEach(this::add);
         return this;
     }
 
@@ -120,7 +121,8 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Maximum X coordinate of the shape
      */
     public Double getMaxX() {
-        Optional<Point2d> maxXPoint = coords.stream().max(Comparator.comparing(Point2d::X));
+        Optional<Point2d> maxXPoint = coords.stream()
+                                            .max(Comparator.comparing(Point2d::X));
         return maxXPoint.isPresent() ? maxXPoint.get().X() : -Double.MAX_VALUE;
     }
 
@@ -128,7 +130,8 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Maximum Y coordinate of the shape
      */
     public Double getMaxY() {
-        Optional<Point2d> maxYPoint = coords.stream().max(Comparator.comparing(Point2d::Y));
+        Optional<Point2d> maxYPoint = coords.stream()
+                                            .max(Comparator.comparing(Point2d::Y));
         return maxYPoint.isPresent() ? maxYPoint.get().Y() : -Double.MAX_VALUE;
     }
 
@@ -143,7 +146,8 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Minimum X coordinate of the shape
      */
     public Double getMinX() {
-        Optional<Point2d> minXPoint = coords.stream().min(Comparator.comparing(Point2d::X));
+        Optional<Point2d> minXPoint = coords.stream()
+                                            .min(Comparator.comparing(Point2d::X));
         return minXPoint.isPresent() ? minXPoint.get().X() : Double.MAX_VALUE;
     }
 
@@ -151,7 +155,8 @@ public class BaseShape extends Transform implements Cloneable {
      * @return Minimum Y coordinate of the shape
      */
     public Double getMinY() {
-        Optional<Point2d> minYPoint = coords.stream().min(Comparator.comparing(Point2d::Y));
+        Optional<Point2d> minYPoint = coords.stream()
+                                            .min(Comparator.comparing(Point2d::Y));
         return minYPoint.isPresent() ? minYPoint.get().Y() : Double.MAX_VALUE;
     }
 

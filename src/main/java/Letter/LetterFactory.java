@@ -9,6 +9,7 @@ public final class LetterFactory {
     final static Double halfMaxWidth = maxWidth / 2;
     final static Double stripeThickness = maxHeight / 8;
     final static Double halfStripeThickness = stripeThickness / 2;
+    final static Double angle45Degree = Math.PI / 4;
 
 
     /** TODO
@@ -20,13 +21,13 @@ public final class LetterFactory {
         Rectangle line = new Rectangle(halfStripeThickness, maxHeight);
         Rectangle middleLine = new Rectangle(halfMaxWidth, halfStripeThickness);
         BaseShape middleLineTranslate = new BaseShape();
-        middleLineTranslate.addAll(middleLine.translate(0.0, halfMaxHeight / 2));
-        BaseShape obliqueLine1 = new BaseShape();
-        BaseShape obliqueLine2 = new BaseShape();
-        obliqueLine1.addAll(line.translate(-halfMaxWidth / 2, 0.0));
-        obliqueLine2.addAll(line.translate(halfMaxWidth / 2, 0.0));
-        shape.addAll(obliqueLine1.rotate(Math.PI / 16));
-        shape.addAll(obliqueLine2.rotate(-Math.PI / 16));
+        middleLineTranslate.addAll(middleLine.translate(0.0, halfMaxHeight / 4));
+        BaseShape obliqueLineLeft = new BaseShape();
+        BaseShape obliqueLineRight = new BaseShape();
+        obliqueLineLeft.addAll(line.translate(-halfMaxWidth / 2, 0.0));
+        obliqueLineRight.addAll(line.translate(halfMaxWidth / 2, 0.0));
+        shape.addAll(obliqueLineLeft.rotate(angle45Degree / 4));
+        shape.addAll(obliqueLineRight.rotate(-angle45Degree / 4));
         shape.add(middleLineTranslate);
         return shape;
     }
@@ -52,7 +53,7 @@ public final class LetterFactory {
         Ellipse ellipse = new Ellipse(maxWidth, maxHeight);
         ellipse.remove(new Ellipse(maxWidth - stripeThickness, maxHeight - stripeThickness));
         Rectangle line = new Rectangle(2 * stripeThickness, halfMaxHeight);
-        ellipse.removeAll(line.translate(halfMaxWidth - stripeThickness, 0.0));
+        ellipse.removeAll(line.translate(halfMaxWidth - halfStripeThickness, 0.0));
         return ellipse;
     }
 
@@ -62,11 +63,12 @@ public final class LetterFactory {
      */
     public static BaseShape create_E() {
         BaseShape shape = new BaseShape();
-        Square square = (Square) new Square(halfMaxHeight).remove(new Rectangle(halfMaxHeight - stripeThickness, halfMaxHeight - stripeThickness));
-        shape.addAll(square.translate(0.0, -halfMaxHeight / 2));
-        shape.addAll(square.translate(0.0, halfMaxHeight / 2));
-        Rectangle line = new Rectangle(2 * stripeThickness, 2 * maxHeight);
-        shape.removeAll(line.translate(halfMaxHeight / 2 - halfStripeThickness, 0.0));
+        Rectangle rectangleToRemove = new Rectangle(maxWidth, halfMaxHeight - (halfStripeThickness + halfStripeThickness / 2));
+        Rectangle rectangle = (Rectangle) new Rectangle(maxWidth, halfMaxHeight).removeAll(rectangleToRemove.translate(halfStripeThickness, 0.0));
+        shape.addAll(rectangle.translate(0.0, -halfMaxHeight / 2));
+        shape.addAll(rectangle.translate(0.0, halfMaxHeight / 2));
+        shape.removeAll(new Rectangle(maxWidth, halfStripeThickness).translate(halfStripeThickness, halfStripeThickness));
+        shape.removeAll(new Rectangle(maxWidth, halfStripeThickness).translate(halfStripeThickness, -halfStripeThickness));
         return shape;
     }
 
@@ -77,8 +79,8 @@ public final class LetterFactory {
     public static BaseShape create_H() {
         Rectangle rectangle = new Rectangle(maxWidth, maxHeight);
         Rectangle rectangleToRemove = new Rectangle(maxWidth - stripeThickness, halfMaxHeight);
-        rectangle.removeAll(rectangleToRemove.translate(0.0, (halfMaxHeight / 2) + halfStripeThickness));
-        rectangle.removeAll(rectangleToRemove.translate(0.0, -((halfMaxHeight / 2) + halfStripeThickness)));
+        rectangle.removeAll(rectangleToRemove.translate(0.0, (halfMaxHeight + halfStripeThickness) / 2));
+        rectangle.removeAll(rectangleToRemove.translate(0.0, -(halfMaxHeight + halfStripeThickness) / 2));
         return rectangle;
     }
 
@@ -90,7 +92,7 @@ public final class LetterFactory {
         BaseShape shape = new BaseShape();
         Rectangle line = new Rectangle(halfStripeThickness, maxHeight);
         shape.addAll(line.translate(-halfMaxWidth, 0.0));
-        shape.addAll(line.rotate(-Math.PI / 8));
+        shape.addAll(line.rotate(-angle45Degree / 2));
         shape.addAll(line.translate(halfMaxWidth, 0.0));
         return shape;
     }
@@ -101,6 +103,6 @@ public final class LetterFactory {
      */
     public static BaseShape create_O() {
         Ellipse ellipse = new Ellipse(maxWidth, maxHeight);
-        return ellipse.remove(new Ellipse(maxWidth - stripeThickness, maxHeight - stripeThickness));
+        return ellipse.remove(new Ellipse(maxWidth - stripeThickness, maxHeight - 2 * stripeThickness));
     }
 }

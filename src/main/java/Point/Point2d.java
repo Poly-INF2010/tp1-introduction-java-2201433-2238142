@@ -70,8 +70,8 @@ public class Point2d extends AbstractPoint {
      */
     public Point2d rotate(Double angle) {
         Double[][] rotationMatrix = {
-                {Math.cos(angle), -Math.sin(angle)},
-                {Math.sin(angle), Math.cos(angle)}
+            {Math.cos(angle), -Math.sin(angle)},
+            {Math.sin(angle), Math.cos(angle)}
         };
         rotate(rotationMatrix);
         return this;

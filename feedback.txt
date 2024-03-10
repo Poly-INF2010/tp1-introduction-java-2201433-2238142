@@ -1,0 +1,6 @@
+Points	5/5
+Formes	4/5
+Lettres	5/5
+Qualité de code et Design	4/5
+Total	18/20
+Les methodes comme baseshape add ( baseshape ) doivent utiliser addAll , (duplication de code)
